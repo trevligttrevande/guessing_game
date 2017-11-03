@@ -7,7 +7,8 @@ use rand::Rng;
 fn main() {
     println!("Guess the number!");
 
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+    let secret_number = rand::thread_rng().gen_range(1, 101); // Generate an integer between 1 and 100
+    let mut guesses: Vec<(u32,String)> = Vec::new();
     let mut number_of_guesses = 0;
 
     loop {
@@ -17,6 +18,10 @@ fn main() {
 
         io::stdin().read_line(&mut guess)
             .expect("Failed to read line");
+
+        number_of_guesses += 1; // Increment number_of_guesses each loop
+        let blaaa: (u32,String) = (number_of_guesses,guess.clone());
+        guesses.push(blaaa);
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
@@ -28,13 +33,16 @@ fn main() {
          
         println!("You guessed: {}", guess);
 
-        number_of_guesses += 1; // Increment number_of_guesses each loop
+
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small!"),
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win! You needed {} guesses!", number_of_guesses);
+                for element in guesses.iter() {                                     // Iterators are convinient
+                    println!("Guess number {} was {}",element.0, element.1 )
+                }
                 break;
             }
         }
