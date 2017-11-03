@@ -13,10 +13,15 @@ fn main() {
     loop {
         println!("Please input your guess.");
 
-        let guess: u32 = match get_guess(){
-            Ok(num)=> num,
-            Err(e) => {
-                println!("ERROR: {}",e);
+        let mut guess = String::new();
+
+        io::stdin().read_line(&mut guess)
+            .expect("Failed to read line");
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Bad Input! Very bad!");
                 continue;
             }
         };
@@ -33,19 +38,5 @@ fn main() {
                 break;
             }
         }
-    }
-}
-
-// This function handles the input for the guessing game.
-// If the input is not an integer it returns an error instead.
-fn get_guess()->Result<u32, std::num::ParseIntError> 
-{
-    let mut guess = String::new();
-    io::stdin().read_line(&mut guess)
-            .expect("Failed to read line");
-
-    match guess.trim().parse() {
-        Ok(num)=>Ok(num),
-        Err(e) =>Err(e),
     }
 }
