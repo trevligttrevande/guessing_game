@@ -20,8 +20,8 @@ fn main() {
             .expect("Failed to read line");
 
         number_of_guesses += 1; // Increment number_of_guesses each loop
-        let blaaa: (u32,String) = (number_of_guesses,guess.clone());
-        guesses.push(blaaa);
+        let guess_tuple: (u32,String) = (number_of_guesses,guess.clone());
+        guesses.push(guess_tuple);
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
