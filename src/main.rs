@@ -38,7 +38,7 @@ fn main() {
 
 // This function handles the input for the guessing game.
 // If the input is not an integer it returns an error instead.
-fn get_guess()->Result<u32, std::num::ParseIntError> 
+fn get_guess()->Result<u32, String> 
 {
     let mut guess = String::new();
     io::stdin().read_line(&mut guess)
@@ -46,6 +46,11 @@ fn get_guess()->Result<u32, std::num::ParseIntError>
 
     match guess.trim().parse() {
         Ok(num)=>Ok(num),
-        Err(e) =>Err(e),
+        Err(e) =>{
+            let test = format!("{}{}", "In parsing u32, ", e);
+            Err(test)
+        }
+            
+        
     }
 }
