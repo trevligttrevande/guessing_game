@@ -6,4 +6,4 @@ If the guess is not an integer, the game will complain.
 When the correct integer is guessed the game will print out the number of tries it took and terminate.
 
 
-This version also returns every guess you made, including the guesses involving obcene phrases. 
+This version also returns every guess you made TWICE, including the guesses involving obcene phrases TWICE as obcene. 

@@ -40,9 +40,12 @@ fn main() {
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win! You needed {} guesses!", number_of_guesses);
-                for element in guesses.iter() {                                     // Iterators are convinient
-                    println!("Guess number {} was {}",element.0, element.1 )
+                for _number in 0..2 {                                                    // 0, 1, not 2
+                    for element in guesses.iter() {                                     // Iterators are convinient
+                        println!("Guess number {} was {}",element.0, element.1 );
+                    }    
                 }
+                
                 break;
             }
         }
