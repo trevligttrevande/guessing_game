@@ -40,8 +40,15 @@ fn main() {
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win! You needed {} guesses!", number_of_guesses);
-                for element in guesses {
-                    println!("Guess number {} was {} ",element.0,element.1);
+                for index in 0..3 {
+                    println!(
+                        "Guess number {} was {} ",
+                        number_of_guesses-index, 
+                        match guesses.get(&(number_of_guesses-index)) {
+                            Some(guess)=>guess,     // If the guess number is found, return the corresponding guess
+                            None=>break,            // If not, break out of the loop
+                        }
+                    );
                 }
                 break;
             }
