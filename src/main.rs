@@ -40,8 +40,12 @@ fn main() {
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win! You needed {} guesses!", number_of_guesses);
-                for element in guesses.iter() {                                     // Iterators are convinient
-                    println!("Guess number {} was {}",element.0, element.1 )
+                for index in 0..3 {                                     // Iterators are convinient
+                    let element = match guesses.pop() {
+                        Some(e)=>e,
+                        None=>break,
+                    };
+                    println!("Guess number {} was {} ",element.0,element.1);
                 }
                 break;
             }
