@@ -3,12 +3,13 @@ extern crate rand;
 use std::io;
 use std::cmp::Ordering;
 use rand::Rng;
+use std::collections::HashMap;
 
 fn main() {
     println!("Guess the number!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101); // Generate an integer between 1 and 100
-    let mut guesses: Vec<(u32,String)> = Vec::new();
+    let mut guesses  = HashMap::new();
     let mut number_of_guesses = 0;
 
     loop {
@@ -20,8 +21,7 @@ fn main() {
             .expect("Failed to read line");
 
         number_of_guesses += 1; // Increment number_of_guesses each loop
-        let guess_tuple: (u32,String) = (number_of_guesses,guess.clone());
-        guesses.push(guess_tuple);
+        guesses.insert(number_of_guesses, guess.clone());
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
@@ -40,11 +40,7 @@ fn main() {
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win! You needed {} guesses!", number_of_guesses);
-                for index in 0..3 {                                     // Iterators are convinient
-                    let element = match guesses.pop() {
-                        Some(e)=>e,
-                        None=>break,
-                    };
+                for element in guesses {
                     println!("Guess number {} was {} ",element.0,element.1);
                 }
                 break;
